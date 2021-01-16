@@ -10,10 +10,6 @@ namespace AzureSqlMapper
     public class AzureAssets : IAzureAssets
     {
 
-        //string clientId = "564a986e-c252-429f-948d-32dd9ee08b43";
-        //string clientSecret = "QRBD~kb1eyVR~09K7.fiC_tVb~~mGfPmSR";
-        //string tenantId = "184e4ab4-a9bf-4b68-a72f-eb4e03b54ae1";
-
         protected string clientId { get; private set; }
         protected string clientSecret { get; private set; }
         protected string tenantId { get; private set; }
