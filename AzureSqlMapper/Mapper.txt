@@ -1,0 +1,64 @@
+﻿ //var clientId = "564a986e-c252-429f-948d-32dd9ee08b43";
+
+ //var clientSecret = "QRBD~kb1eyVR~09K7.fiC_tVb~~mGfPmSR";
+
+  //var tenantId = "184e4ab4-a9bf-4b68-a72f-eb4e03b54ae1";
+
+ //var subscriptionId = "bc0b3b15-7d6c-4fa4-b3a7-d208b08fde5c";
+
+
+ISqlServer
+        string SystemAssignedManagedServiceIdentityTenantId { get; set; }
+        string Version { get; set; }
+        string SystemAssignedManagedServiceIdentityPrincipalId { get; set; }
+        string Kind { get; set; }
+        string FullyQualifiedDomainName { get; set; }
+        bool IsManagedServiceIdentityEnabled { get; set; }
+        string AdministratorLogin { get; set; }
+        string State { get; set; }
+
+IResource
+         string Type { get; }
+         string RegionName { get; }
+
+IHasId
+       string Id { get; }
+ 
+ IIndexable
+        string Key { get; }
+IHasName
+        string Name { get; }
+
+IHasResourceGroup
+        string ResourceGroupName { get; }
+
+ISqlManager
+         string TenantId { get; }
+ServerInner
+        
+        public string Kind { get; }
+      
+        public string AdministratorLogin { get; set; }
+       
+        public string AdministratorLoginPassword { get; set; }
+       
+        public string Version { get; set; }
+       
+        public string State { get; }
+       
+        public string FullyQualifiedDomainName { get; }
+
+
+ ISqlFirewallRule
+   
+        string SqlServerName { get; }
+       
+        string Kind { get; }
+      
+        string StartIPAddress { get; }
+      
+        Region Region { get; }
+       
+        string ParentId { get; }
+        
+        string EndIPAddress { get; }
