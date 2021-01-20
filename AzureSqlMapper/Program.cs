@@ -67,7 +67,7 @@ namespace AzureSqlMapper
 
             Log.Logger.Information("Collecting the sqlservers properties");
 
-            MongoCRUD db = new MongoCRUD("AzureMapper01");
+            MongoCRUD db = new MongoCRUD("AzureSql");
             Log.Logger.Information("Conneting to database");
 
 
@@ -80,7 +80,7 @@ namespace AzureSqlMapper
 
 
             Console.WriteLine("waiting for user to click to stop!!");
-
+           
             Console.ReadKey();
         }
         private static void PrintData(List<AzureSqlProps> _sqllist)

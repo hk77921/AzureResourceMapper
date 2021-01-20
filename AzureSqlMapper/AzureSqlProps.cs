@@ -33,6 +33,11 @@ namespace AzureSqlMapper
         public string ResourceGroupName { get; set; }
         public string TenantId { get; set; }
         public string AdministratorLoginPassword { get; set; }
+        public DateTime RecordAdded
+        {
+            get;
+            set;
+        }
 
         public List<SqlFirewallRule> SqlFirewallRule;
         public List<SqlEncryptionProtector> sqlEncryptionProtectors;
