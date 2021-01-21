@@ -1,6 +1,6 @@
 ﻿//using DocumentFormat.OpenXml.Bibliography;
 
-namespace AzureSqlMapper
+namespace AzureSqlMapper.Models
 {
     public class SqlVirtualNetworkRule
     {

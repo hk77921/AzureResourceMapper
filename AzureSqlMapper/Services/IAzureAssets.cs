@@ -2,7 +2,7 @@
 using Microsoft.Azure.Management.Sql.Fluent;
 using System.Collections.Generic;
 
-namespace AzureSqlMapper
+namespace AzureSqlMapper.Services
 {
     public interface IAzureAssets
     {

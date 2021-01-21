@@ -5,7 +5,7 @@ using Microsoft.Azure.Management.Sql.Fluent;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 
-namespace AzureSqlMapper
+namespace AzureSqlMapper.Services
 {
     public class AzureAssets : IAzureAssets
     {
@@ -20,7 +20,6 @@ namespace AzureSqlMapper
         public AzureAssets(IConfiguration config)
         {
             _config = config;
-
             clientId = _config.GetValue<string>("AzureSecret:clientId");
             clientSecret = _config.GetValue<string>("AzureSecret:clientSecret");
             tenantId = _config.GetValue<string>("AzureSecret:tenantId");
@@ -38,8 +37,6 @@ namespace AzureSqlMapper
             var sqlServers = azure.SqlServers.List();
             return sqlServers;
         }
-
-
-
     }
+       
 }

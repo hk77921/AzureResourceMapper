@@ -2,78 +2,43 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace TempDI
 {
     public class Program
     {
-        private readonly ILogger<Program> _logger;
-        private readonly serviceA _serviceA;
-        private static IServiceProvider _serviceProvider;
 
         static void Main(string[] args)
         {
-            // var host = CreateHostBuilder(args).Build();
+            var services = ConfigureServices();
 
-            // host.Services.GetRequiredService<Program>().Run();
+            var serviceProvider = services.BuildServiceProvider();
 
-
-            RegisterServices();
-            IServiceScope scope = _serviceProvider.CreateScope();
-            scope.ServiceProvider.GetRequiredService<StartUp>().Run();
-            DisposeServices();
-
+            serviceProvider.GetService<StartUp>().Run();
         }
 
-
-
-
-        public Program(ILogger<Program> logger, serviceA serviceA)
+        private static IServiceCollection ConfigureServices()
         {
-            _logger = logger;
-            _serviceA = serviceA;
-        }
+            IServiceCollection services = new ServiceCollection();
 
-        //public void Run()
-        //{
-        //    _logger.LogInformation("Program is running..");
-        //    _serviceA.SomeAWork();
-        //    _logger.LogInformation("Process completed!!");
-        //}
-
-        //private static IHostBuilder CreateHostBuilder(string[] args)
-        //{
-        //    return Host.CreateDefaultBuilder(args)
-        //        .ConfigureServices(services =>
-        //       {
-        //           services.AddTransient<Program>();
-        //           services.AddTransient<serviceA>();
-        //           services.AddTransient<serviceB>();
-        //       });
-        //}
-
-
-        private static void RegisterServices()
-        {
-            var services = new ServiceCollection();
-            services.AddSingleton<StartUp>();
-            services.AddSingleton<IserviceA, serviceA>();
-            services.AddSingleton<IserviceB,serviceB>();
+            var config = LoadConfiguration();
+            services.AddSingleton(config);
+            services.AddTransient<StartUp>();
             services.AddLogging();
-           
-            _serviceProvider = services.BuildServiceProvider(true);
+            services.AddTransient<IserviceA, serviceA>();
+            services.AddTransient<IserviceB, serviceB>();
+            return services;
         }
 
-        private static void DisposeServices()
+        public static IConfiguration LoadConfiguration()
         {
-            if (_serviceProvider == null)
-            {
-                return;
-            }
-            if (_serviceProvider is IDisposable)
-            {
-                ((IDisposable)_serviceProvider).Dispose();
-            }
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            return builder.Build();
         }
+
     }
 }

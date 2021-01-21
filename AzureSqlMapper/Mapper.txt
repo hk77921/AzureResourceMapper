@@ -1,4 +1,49 @@
 
+ private static void PrintData(List<AzureSqlProps> _sqllist)
+        {
+            foreach (var item in _sqllist)
+            {
+
+                Console.WriteLine($"FullyQualifiedDomainName:{item.FullyQualifiedDomainName}");
+                Console.WriteLine($"AdministratorLogin:{item.AdministratorLogin}");
+                Console.WriteLine($"IsManagedServiceIdentityEnabled:{item.IsManagedServiceIdentityEnabled}");
+                Console.WriteLine($"Kind:{item.Kind}");
+                Console.WriteLine($"State:{item.State}");
+                Console.WriteLine($"SystemAssignedManagedServiceIdentityPrincipalId:{item.SystemAssignedManagedServiceIdentityPrincipalId}");
+                Console.WriteLine($"SystemAssignedManagedServiceIdentityTenantId:{item.SystemAssignedManagedServiceIdentityTenantId}");
+                Console.WriteLine($"Version:{item.Version}");
+
+                Console.WriteLine($"Id:{item.Id}");
+                Console.WriteLine($"TenantId:{item.TenantId}");
+                Console.WriteLine($"RegionName:{item.RegionName}");
+                Console.WriteLine($"ResourceGroupName:{item.ResourceGroupName}");
+                Console.WriteLine($"AdministratorLogin:{item.AdministratorLogin}");
+                Console.WriteLine($"AdministratorLoginPassword:{item.AdministratorLoginPassword}");
+                Console.WriteLine($"Name:{item.Name}");
+                Console.WriteLine($"Key:{item.Key}");
+
+                Console.WriteLine("***************************************");
+
+                Console.WriteLine($"********Printing FireWall Rules for id : {item.Id}**********");
+
+                foreach (var rule in item.SqlFirewallRule)
+                {
+
+                    Console.WriteLine($"\t\t ParentId:{rule.ParentId}");
+                    Console.WriteLine($"\t\t SqlServerName:{rule.SqlServerName}");
+                    Console.WriteLine($"\t\t StartIPAddress:{rule.StartIPAddress}");
+                    Console.WriteLine($"\t\t EndIPAddress:{rule.EndIPAddress}");
+                    Console.WriteLine($"\t\t Kind:{rule.Kind}");
+
+                }
+
+
+            }
+        }
+
+
+
+
 
 ISqlServer
         string SystemAssignedManagedServiceIdentityTenantId { get; set; }

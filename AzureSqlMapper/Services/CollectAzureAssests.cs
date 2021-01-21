@@ -1,10 +1,11 @@
-﻿//using DocumentFormat.OpenXml.Bibliography;
+﻿using AzureSqlMapper.Models;
 using Microsoft.Azure.Management.Sql.Fluent;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AzureSqlMapper
+namespace AzureSqlMapper.Services
 {
     public class CollectAzureAssests : ICollectAzureAssests
     {
@@ -13,7 +14,7 @@ namespace AzureSqlMapper
 
             List<AzureSqlProps> _sqllist = new List<AzureSqlProps>();
 
-
+            Log.Information("Collecting SQL properties");
 
             foreach (var sqlServer in sqlServers)
             {
@@ -51,7 +52,7 @@ namespace AzureSqlMapper
 
         private void Encryptionprotector(ISqlServer sqlServer, AzureSqlProps sQLProps)
         {
-            // Binding the sql Encryption protector
+            Log.Information("Collecting Encryptionprotector for {0}", sqlServer.Name);
 
             var _sqlEncryptionProtectors = sqlServer.EncryptionProtectors.List();
 
@@ -71,6 +72,8 @@ namespace AzureSqlMapper
 
         private void FirewallRules(ISqlServer sqlServer, AzureSqlProps sQLProps)
         {
+            Log.Information("Collecting FirewallRules for {0}", sqlServer.Name);
+
             var _firewallRules = sqlServer.FirewallRules.List();
 
             foreach (var item in _firewallRules)

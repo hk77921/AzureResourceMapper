@@ -1,23 +1,40 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using System;
+
 
 namespace TempDI
 {
     public class StartUp
     {
-        private readonly ILogger<StartUp> _logger;
-        private readonly IserviceA _serviceA;
+        private readonly IConfiguration _config;
+        private readonly IserviceA iserviceA;
 
-        public StartUp(ILogger<StartUp> logger, IserviceA serviceA)
+        public StartUp(IConfiguration config,IserviceA iserviceA)
         {
-            _logger = logger;
-            _serviceA = serviceA;
-
+            _config = config;
+            this.iserviceA = iserviceA;
         }
+     
         public void Run()
         {
-            //_logger.LogInformation("Calling from startup..");
-            System.Console.WriteLine("Calling from startup");
-            _serviceA.SomeAWork();
+            Console.WriteLine("Welcome from startup..");
+
+            var logDirectory = _config.GetValue<string>("Runtime:LogOutputDirectory");
+            // Using serilog here, can be anything
+            var log = new LoggerConfiguration()
+                .WriteTo.Console()
+                .WriteTo.File(logDirectory)
+                .CreateLogger();
+
+            log.Information("Serilog logger information");
+            Console.WriteLine("Hello from App.cs");
+          
         }
+      
+
+       
     }
 }

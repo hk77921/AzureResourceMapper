@@ -1,10 +1,9 @@
 ﻿
-using Bogus.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 
-namespace AzureSqlMapper
+namespace AzureSqlMapper.Models
 {
     public class AzureSqlProps
     {
@@ -33,11 +32,7 @@ namespace AzureSqlMapper
         public string ResourceGroupName { get; set; }
         public string TenantId { get; set; }
         public string AdministratorLoginPassword { get; set; }
-        public DateTime RecordAdded
-        {
-            get;
-            set;
-        }
+        public DateTime RecordAdded  {  get; set; }
 
         public List<SqlFirewallRule> SqlFirewallRule;
         public List<SqlEncryptionProtector> sqlEncryptionProtectors;
