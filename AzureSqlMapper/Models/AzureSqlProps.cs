@@ -12,7 +12,9 @@ namespace AzureSqlMapper.Models
             SqlFirewallRule = new List<SqlFirewallRule>();
             sqlEncryptionProtectors = new List<SqlEncryptionProtector>();
             sqlVirtualNetworkRules = new List<SqlVirtualNetworkRule>();
-
+            sqlServerDnsAliases = new List<SqlServerDnsAlias>();
+            sqlFailoverGroups = new List<SqlFailoverGroup>();
+            sqlDatabases = new List<SqlDatabase>();
         }
         [BsonId]
         public Guid Id { get; set; }
@@ -37,6 +39,8 @@ namespace AzureSqlMapper.Models
         public List<SqlFirewallRule> SqlFirewallRule;
         public List<SqlEncryptionProtector> sqlEncryptionProtectors;
         public List<SqlVirtualNetworkRule> sqlVirtualNetworkRules;
-
+        public List<SqlServerDnsAlias> sqlServerDnsAliases;
+        public List<SqlFailoverGroup> sqlFailoverGroups;
+        public List<SqlDatabase> sqlDatabases;
     }
 }

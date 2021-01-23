@@ -16,28 +16,20 @@ namespace AzureSqlMapper
         static void Main(string[] args)
         {
 
-           // var logDirectory = _config.GetValue<string>("Runtime:LogOutputDirectory");
-
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
-             
                 .CreateLogger();
 
             Log.Logger.Information("*****Starting the application*******");
-          
+
             var services = ConfigureServices();
-           
             Log.Information("configure service");
-            
+
 
             var serviceProvider = services.BuildServiceProvider();
-          
             Log.Information("Build service provider");
 
             serviceProvider.GetRequiredService<AzureAssetMapper>().Run();
-           
-            Log.Information("Start the asset Mapper");
-
             Console.ReadKey();
         }
 
@@ -46,15 +38,14 @@ namespace AzureSqlMapper
             IServiceCollection services = new ServiceCollection();
 
             var config = LoadConfiguration();
-            
+
             services.AddSingleton(config);
             services.AddTransient<AzureAssetMapper>();
             services.AddScoped<IAzureAssets, AzureAssets>();
             services.AddScoped<ICollectAzureAssests, CollectAzureAssests>();
             services.AddSingleton<SqlRepository>();
             services.AddSingleton<MongoDBInit>();
-            services.AddScoped<IDatabaseSettings,DatabaseSettings>();
-
+            services.AddScoped<IDatabaseSettings, DatabaseSettings>();
 
             services.AddLogging();
 
@@ -68,7 +59,7 @@ namespace AzureSqlMapper
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsetting{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "production"}.json", optional: true)
                 .AddEnvironmentVariables();
-                
+
 
             return builder.Build();
         }
